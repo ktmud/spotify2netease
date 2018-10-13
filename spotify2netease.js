@@ -3,6 +3,8 @@
 const getStdin = require('get-stdin')
 const csv = require('csv')
 
+var listName = process.argv[2] || 'Spotify List'
+
 process.stdin
   .pipe(csv.parse())
   .pipe(csv.transform(function(item) {
@@ -13,7 +15,7 @@ process.stdin
   }))
   .pipe(csv.stringify(function(err, items) {
     console.log(`<?xml version="1.0" encoding="windows-1252"?>
-    <List ListName="Spotify List">
+    <List ListName="${listName}">
       ${items}
     </List>`)
   }))
